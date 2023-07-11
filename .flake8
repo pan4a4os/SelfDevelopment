@@ -1,0 +1,32 @@
+# http://flake8.pycqa.org/en/latest/user/configuration.html
+
+[flake8]
+
+# E203 -> Whitespace before "some symbol here"
+# F401 -> Unused import
+# F403 -> Can`t detect undefined names using * import
+
+extend-ignore = E203, F403
+max-line-length = 120
+exclude =
+    # Git
+    .git,
+    .gitignore,
+
+    # Python cache
+    *.pyc,
+    __pycache__,
+
+    # Django apps and __init__
+    apps.py,
+    __init__.py
+
+    # Requirements
+    requirements/,
+
+    # Migrations
+    */migrations/*,
+
+    # Virtual environment
+    *.venv,
+    venv/

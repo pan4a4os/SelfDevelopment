@@ -1,0 +1,19 @@
+# Virtual environment
+../venv/
+
+# Migrations
+*/migrations/*
+!*/migrations/__init__.py
+
+# Python cache
+*/__pycache__/*
+*.pyc
+
+# Database
+*.sqlite3
+
+# IDE
+*.idea
+
+# Django environment | .env
+*/.env
