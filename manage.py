@@ -25,9 +25,9 @@ def main():
 
         raise
 
-    # This allows easy placement of apps within the interior notes directory.
+    # This allows easy placement of apps within the interior source directory.
     current_path = os.path.dirname(os.path.abspath(__file__))
-    sys.path.append(os.path.join(current_path, "notes"))
+    sys.path.append(os.path.join(current_path, "source"))
 
     execute_from_command_line(sys.argv)
 

@@ -11,20 +11,20 @@ environ.Env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Applications directory | backend-develop/config/settings.py - 2 = backend-develop/
+# Define applications directory | SelfDevelopment/config/settings.py - 2  =  SelfDevelopment/
 ROOT_DIR = environ.Path(__file__) - 2
-APPS_DIR = ROOT_DIR.path("notes")
-sys.path.append("notes/apps")
+APPS_DIR = ROOT_DIR.path("source")
+sys.path.append("source/apps")
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env("DJANGO_DEBUG")
+DEBUG = env.bool("DJANGO_DEBUG")
 
 ALLOWED_HOSTS = ["*"]
 
-# Application definition
+# Django application definition
 DJANGO_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -34,11 +34,9 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
-MY_APPS = [
-    "config",
-]
+LOCAL_APPS = ["source.apps.test_app.apps.TestAppConfig"]
 
-INSTALLED_APPS = DJANGO_APPS + MY_APPS
+INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -55,7 +53,7 @@ ROOT_URLCONF = env("DJANGO_ROOT_URLCONF")
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [str(APPS_DIR.path("templates"))],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -103,14 +101,14 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = env("DJANGO_LANGUAGE_CODE")
 TIME_ZONE = env("DJANGO_TIME_ZONE")
-USE_I18N = env("DJANGO_USE_I18N")
-USE_TZ = env("DJANGO_USE_TZ")
+USE_I18N = env.bool("DJANGO_USE_I18N")
+USE_TZ = env.bool("DJANGO_USE_TZ")
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = env("DJANGO_STATIC_URL")
-STATIC_ROOT = os.path.join(BASE_DIR, STATIC_URL)
+STATIC_ROOT = os.path.join(APPS_DIR, STATIC_URL)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
